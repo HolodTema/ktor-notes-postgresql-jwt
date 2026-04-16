@@ -18,11 +18,30 @@ kotlin {
 }
 
 dependencies {
+    // Authentication & JWT
+    implementation("io.ktor:ktor-server-auth:2.3.0")
+    implementation("io.ktor:ktor-server-auth-jwt:2.3.0")
+
+    // to use application.yaml file
+    implementation("io.ktor:ktor-server-config-yaml")
+
+    // To hash passwords with BCrypt algorithm
+    implementation("at.favre.lib:bcrypt:0.10.2")
+
+    // Exposed ORM to work with PostgreSQL DB
+    implementation("org.jetbrains.exposed:exposed-core:0.44.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.44.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.44.1")
+    implementation("org.postgresql:postgresql:42.7.7")
+    // to work with datetime fields of PostgreSQL and Exposed ORM
+    implementation("org.jetbrains.exposed:exposed-java-time:0.44.1")
+
+    // Ktor core
     implementation("io.ktor:ktor-server-core-jvm")
+    // Netty is server which runs Ktor backend (like apache server or nginx etc)
     implementation("io.ktor:ktor-server-netty")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-core")
-    implementation("io.ktor:ktor-server-config-yaml")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

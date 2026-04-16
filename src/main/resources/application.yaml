@@ -1,6 +1,15 @@
 ktor:
   application:
     modules:
-      - com.example.ApplicationKt.module
+      - com.terabyte.ktornotes.ApplicationKt.module
   deployment:
     port: 8080
+
+jwt:
+  # get secret from environment-var JWT_SECRET
+  # JWT_SECRET is some string
+  # for example, "MyPerfectSecretKey228" etc.
+  secret: ${JWT_SECRET}
+  issuer: "ktor-notes-app"
+  realm: "ktor-notes"
+
