@@ -22,7 +22,7 @@ dependencies {
     implementation("io.ktor:ktor-server-auth:2.3.0")
     implementation("io.ktor:ktor-server-auth-jwt:2.3.0")
 
-    // Configuration with .yaml file
+    // to use application.yaml file
     implementation("io.ktor:ktor-server-config-yaml")
 
     // To hash passwords with BCrypt algorithm

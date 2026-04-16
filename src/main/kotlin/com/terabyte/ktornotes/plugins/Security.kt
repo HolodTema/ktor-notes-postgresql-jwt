@@ -39,14 +39,14 @@ import java.util.Date
 
 // configure JWT auth
 fun Application.configureJWT() {
+    // read constants from application.yaml file
     // secret key to sign and prove tokens
-    val jwtSecret = System.getenv("JWT_SECRET") ?: "your-secret-key"
-
+    val jwtSecret = environment.config.property("jwt.secret").getString()
     // who gave the token
-    val jwtIssuer = "ktor--notes-postgres-jwt-app"
-
+    val jwtIssuer = environment.config.property("jwt:issuer").getString()
     // in what system (application, server, location) such a token works
-    val jwtRealm = "ktor-notes-postgres-jwt"
+    val jwtRealm = environment.config.property("jwt:realm").getString()
+
 
     // configure Authentication system
     install(Authentication) {
