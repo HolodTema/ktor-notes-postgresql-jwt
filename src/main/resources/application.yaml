@@ -13,3 +13,7 @@ jwt:
   issuer: "ktor-notes-app"
   realm: "ktor-notes"
 
+postgres:
+  url: ${DB_URL}
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}

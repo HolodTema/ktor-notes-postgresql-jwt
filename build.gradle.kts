@@ -4,17 +4,24 @@ val logback_version: String by project
 plugins {
     kotlin("jvm") version "2.3.0"
     id("io.ktor.plugin") version "3.4.2"
+    application
 }
 
-group = "com.example"
+group = "com.terabyte"
 version = "0.0.1"
 
 application {
-    mainClass = "io.ktor.server.netty.EngineMain"
+    mainClass = "com.terabyte.ktornotes.ApplicationKt"
 }
 
 kotlin {
     jvmToolchain(21)
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("ktor-notes-app.jar")
+    }
 }
 
 dependencies {

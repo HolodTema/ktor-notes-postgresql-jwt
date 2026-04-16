@@ -43,9 +43,9 @@ fun Application.configureJWT() {
     // secret key to sign and prove tokens
     val jwtSecret = environment.config.property("jwt.secret").getString()
     // who gave the token
-    val jwtIssuer = environment.config.property("jwt:issuer").getString()
+    val jwtIssuer = environment.config.property("jwt.issuer").getString()
     // in what system (application, server, location) such a token works
-    val jwtRealm = environment.config.property("jwt:realm").getString()
+    val jwtRealm = environment.config.property("jwt.realm").getString()
 
 
     // configure Authentication system
