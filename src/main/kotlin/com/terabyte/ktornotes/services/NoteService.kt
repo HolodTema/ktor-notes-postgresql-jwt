@@ -48,7 +48,7 @@ class NoteService {
     }
 
 
-    fun getNotesByUser(userId: Int): List<Note> {
+    fun getNotesByUserId(userId: Int): List<Note> {
         return Notes.select { Notes.userId eq userId }
             .map { resultRow ->
                 Note(
