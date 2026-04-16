@@ -1,4 +1,4 @@
-package com.example
+package com.terabyte.ktornotes
 
 import io.ktor.server.application.*
 
