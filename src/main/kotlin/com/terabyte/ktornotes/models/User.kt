@@ -9,7 +9,7 @@ object Users : Table() {
     val id = integer("id").autoIncrement()
     val username = varchar("username", 50).uniqueIndex()
     val email = varchar("email", 100).uniqueIndex()
-    val passwordHash = varchar("password_hash", 255),
+    val passwordHash = varchar("password_hash", 255)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
 
     override val primaryKey = PrimaryKey(id)
