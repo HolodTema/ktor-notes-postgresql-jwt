@@ -9,11 +9,12 @@ import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.update
+import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDateTime
 
 class NoteService {
 
-    fun createNote(userId: Int, request: NoteRequest): Note? {
+    fun createNote(userId: Int, request: NoteRequest): Note? = transaction {
         val result = Notes.insert {
             it[Notes.userId] = userId
             it[Notes.title] = request.title
@@ -21,58 +22,52 @@ class NoteService {
             it[Notes.createdAt] = LocalDateTime.now()
             it[Notes.updatedAt] = LocalDateTime.now()
         }
-
         val noteId = result[Notes.id]
-        return getNoteById(noteId)
+        getNoteById(noteId)
     }
 
-
-    fun updateNote(noteId: Int, userId: Int, request: NoteRequest): Boolean {
+    fun updateNote(noteId: Int, userId: Int, request: NoteRequest): Boolean = transaction {
         val amountUpdatedRows = Notes.update(
-            where = { (Notes.id eq noteId) and (Notes.userId eq userId)}
+            where = { (Notes.id eq noteId) and (Notes.userId eq userId) }
         ) {
             it[title] = request.title
             it[content] = request.content
             it[updatedAt] = LocalDateTime.now()
         }
-
-        return amountUpdatedRows > 0
+        amountUpdatedRows > 0
     }
 
-
-    fun deleteNote(noteId: Int, userId: Int): Boolean {
+    fun deleteNote(noteId: Int, userId: Int): Boolean = transaction {
         val amountDeletedRows = Notes.deleteWhere {
             (Notes.id eq noteId) and (Notes.userId eq userId)
         }
-        return amountDeletedRows > 0
+        amountDeletedRows > 0
     }
 
-
-    fun getNotesByUserId(userId: Int): List<Note> {
-        return Notes.select { Notes.userId eq userId }
-            .map { resultRow ->
+    fun getNotesByUserId(userId: Int): List<Note> = transaction {
+        Notes.select { Notes.userId eq userId }
+            .map { row ->
                 Note(
-                    id = resultRow[Notes.id],
-                    userId = resultRow[Notes.userId],
-                    title = resultRow[Notes.title],
-                    content = resultRow[Notes.content],
-                    createdAt = resultRow[Notes.createdAt],
-                    updatedAt = resultRow[Notes.updatedAt]
+                    id = row[Notes.id],
+                    userId = row[Notes.userId],
+                    title = row[Notes.title],
+                    content = row[Notes.content],
+                    createdAt = row[Notes.createdAt],
+                    updatedAt = row[Notes.updatedAt]
                 )
             }
     }
 
-
-    fun getNoteById(noteId: Int): Note? {
-        return Notes.select { Notes.id eq noteId }
-            .map { resultRow ->
+    fun getNoteById(noteId: Int): Note? = transaction {
+        Notes.select { Notes.id eq noteId }
+            .map { row ->
                 Note(
-                    id = resultRow[Notes.id],
-                    userId = resultRow[Notes.userId],
-                    title = resultRow[Notes.title],
-                    content = resultRow[Notes.content],
-                    createdAt = resultRow[Notes.createdAt],
-                    updatedAt = resultRow[Notes.updatedAt]
+                    id = row[Notes.id],
+                    userId = row[Notes.userId],
+                    title = row[Notes.title],
+                    content = row[Notes.content],
+                    createdAt = row[Notes.createdAt],
+                    updatedAt = row[Notes.updatedAt]
                 )
             }.singleOrNull()
     }

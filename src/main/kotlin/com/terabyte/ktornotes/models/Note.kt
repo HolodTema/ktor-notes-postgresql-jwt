@@ -1,5 +1,7 @@
 package com.terabyte.ktornotes.models
 
+import com.terabyte.ktornotes.utils.LocalDateTimeSerializer
+import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.javatime.datetime
@@ -16,15 +18,21 @@ object Notes : Table() {
     override val primaryKey = PrimaryKey(id)
 }
 
+
+@Serializable
 data class Note(
     val id: Int,
     val userId: Int,
     val title: String,
     val content: String,
+    @Serializable(with = LocalDateTimeSerializer::class)
     val createdAt: LocalDateTime,
+    @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime
 )
 
+
+@Serializable
 data class NoteRequest(
     val title: String,
     val content: String

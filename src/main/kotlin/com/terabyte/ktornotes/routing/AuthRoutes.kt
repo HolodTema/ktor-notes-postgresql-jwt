@@ -7,6 +7,7 @@ import com.terabyte.ktornotes.plugins.generateToken
 import com.terabyte.ktornotes.services.UserService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
+import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.post
@@ -38,6 +39,10 @@ fun Route.authRoutes(userService: UserService) {
         }
 
         post("/login") {
+//            val body = call.receiveText()  // сырой JSON
+//            println("Raw body: $body")
+//            val request = kotlinx.serialization.json.Json.decodeFromString<LoginRequest>(body)
+
             val request = call.receive<LoginRequest>()
             val user = userService.login(request.username, request.password)
 

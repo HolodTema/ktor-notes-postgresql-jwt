@@ -6,10 +6,11 @@ import com.terabyte.ktornotes.models.User
 import com.terabyte.ktornotes.models.Users
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class UserService {
 
-    fun register(request: RegisterRequest): User? {
+    fun register(request: RegisterRequest): User? = transaction {
         val passwordCharArray = request.password.toCharArray()
         val hashedPassword = BCrypt.withDefaults().hashToString(12, passwordCharArray)
 
@@ -20,27 +21,19 @@ class UserService {
         }
 
         val userId = result[Users.id]
-        return getUserById(userId)
+        getUserById(userId)  // этот вызов тоже внутри транзакции
     }
 
-
-    fun login(username: String, password: String): User? {
-        val user = getUserByUsername(username) ?: return null
-
-        // compare hash of the password from login-http-request and hash of the password in DB
-        val isPasswordValid = BCrypt.verifyer().verify(password.toCharArray(), user.passwordHash)
+    fun login(username: String, password: String): User? = transaction {
+        val user = getUserByUsername(username) ?: return@transaction null
+        val isPasswordValid = BCrypt.verifyer()
+            .verify(password.toCharArray(), user.passwordHash)
             .verified
-
-        return if (isPasswordValid) {
-            user
-        } else {
-            null
-        }
+        if (isPasswordValid) user else null
     }
 
-
-    fun getUserById(id: Int): User? {
-        return Users.select { Users.id eq id }
+    fun getUserById(id: Int): User? = transaction {
+        Users.select { Users.id eq id }
             .map {
                 User(
                     id = it[Users.id],
@@ -52,9 +45,8 @@ class UserService {
             }.singleOrNull()
     }
 
-
-    fun getUserByUsername(username: String): User? {
-        return Users.select { Users.username eq username }
+    fun getUserByUsername(username: String): User? = transaction {
+        Users.select { Users.username eq username }
             .map {
                 User(
                     id = it[Users.id],
