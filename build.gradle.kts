@@ -25,6 +25,10 @@ ktor {
 }
 
 dependencies {
+    // to convert JSON from requests to data classes
+    implementation("io.ktor:ktor-server-content-negotiation")
+    implementation("io.ktor:ktor-serialization-kotlinx-json")
+
     // Authentication & JWT
     implementation("io.ktor:ktor-server-auth:2.3.0")
     implementation("io.ktor:ktor-server-auth-jwt:2.3.0")
@@ -49,6 +53,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-core")
+    implementation("io.ktor:ktor-serialization-gson:3.4.2")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

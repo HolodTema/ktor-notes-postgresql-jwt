@@ -6,8 +6,10 @@ import com.terabyte.ktornotes.routing.authRoutes
 import com.terabyte.ktornotes.routing.noteRoutes
 import com.terabyte.ktornotes.services.NoteService
 import com.terabyte.ktornotes.services.UserService
+import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.routing.*
 
 
@@ -25,6 +27,11 @@ fun Application.module() {
     // create service objects
     val userService = UserService()
     val noteService = NoteService()
+
+    // to convert JSON to Kotlin classes via kotlinx.serialization
+    install(ContentNegotiation) {
+        json()
+    }
 
     routing {
         authRoutes(userService)
