@@ -64,14 +64,10 @@ fun Application.configureJWT() {
 
             // after token verification we check that the token is valid now
             validate { credential ->
-                // check that token is for our realm
-                if (credential.payload.audience.contains(jwtRealm)) {
-                    // token is valid, we can handle the API request
-                    JWTPrincipal(credential.payload)
-                } else {
-                    // token is invalid, reject request
-                    null
-                }
+                // check that token is for our userId
+                val userId = credential.payload.getClaim("userId")?.asInt() ?: return@validate null
+
+                return@validate JWTPrincipal(credential.payload)
             }
         }
     }
