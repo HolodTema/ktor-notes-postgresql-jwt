@@ -4,6 +4,7 @@ import com.terabyte.ktornotes.plugins.configureDatabase
 import com.terabyte.ktornotes.plugins.configureJWT
 import com.terabyte.ktornotes.routing.authRoutes
 import com.terabyte.ktornotes.routing.noteRoutes
+import com.terabyte.ktornotes.routing.userRoutes
 import com.terabyte.ktornotes.services.NoteService
 import com.terabyte.ktornotes.services.UserService
 import io.ktor.serialization.kotlinx.json.*
@@ -40,5 +41,6 @@ fun Application.module() {
     routing {
         authRoutes(userService)
         noteRoutes(noteService)
+        userRoutes(userService)
     }
 }

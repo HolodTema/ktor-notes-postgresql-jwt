@@ -50,3 +50,10 @@ data class LoginResponse(
     val username: String
 )
 
+@Serializable
+data class UserInfoResponse(
+    val username: String,
+    val email: String
+)
+
+
