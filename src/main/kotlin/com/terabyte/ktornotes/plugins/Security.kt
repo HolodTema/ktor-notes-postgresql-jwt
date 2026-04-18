@@ -75,9 +75,12 @@ fun Application.configureJWT() {
 
 
 //to generate JWT token
-fun generateToken(userId: Int, username: String): String {
-    val jwtSecret = System.getenv("JWT_SECRET") ?: "your-secret-key"
-    val jwtIssuer = "ktor--notes-postgres-jwt-app"
+fun Application.generateToken(userId: Int, username: String): String {
+    // read constants from application.yaml file
+    // secret key to sign and prove tokens
+    val jwtSecret = environment.config.property("jwt.secret").getString()
+    // who gave the token
+    val jwtIssuer = environment.config.property("jwt.issuer").getString()
 
     // every token contains jwtIssuer (who gave the token)
     // userId (the id of the user who uses the token)

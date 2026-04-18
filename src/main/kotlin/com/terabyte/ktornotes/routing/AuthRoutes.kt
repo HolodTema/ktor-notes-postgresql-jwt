@@ -10,6 +10,7 @@ import io.ktor.server.request.receive
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
+import io.ktor.server.routing.application
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 
@@ -33,7 +34,7 @@ fun Route.authRoutes(userService: UserService) {
                 call.respond(HttpStatusCode.BadRequest, "Unable to register new user")
             }
             else {
-                val token = generateToken(user.id, user.username)
+                val token = application.generateToken(user.id, user.username)
                 call.respond(HttpStatusCode.Created, LoginResponse(token, user.username))
             }
         }
@@ -50,7 +51,7 @@ fun Route.authRoutes(userService: UserService) {
                 call.respond(HttpStatusCode.Unauthorized, "Invalid credentials")
             }
             else {
-                val token = generateToken(user.id, user.username)
+                val token = application.generateToken(user.id, user.username)
                 call.respond(LoginResponse(token, user.username))
             }
         }
