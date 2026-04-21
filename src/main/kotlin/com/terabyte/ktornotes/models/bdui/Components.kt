@@ -83,5 +83,7 @@ data class ButtonComponent(
     override val padding: Padding = Padding(),
     override val margin: Margin = Margin(),
     val text: String,
+    val textColorHex: String? = null,
+    val backgroundColorHex: String? = null,
     val action: Action
 ) : Component()

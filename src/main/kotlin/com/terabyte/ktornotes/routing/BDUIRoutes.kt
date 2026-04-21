@@ -1,6 +1,8 @@
 package com.terabyte.ktornotes.routing
 
+import com.terabyte.ktornotes.models.bdui.ButtonComponent
 import com.terabyte.ktornotes.models.bdui.ColumnComponent
+import com.terabyte.ktornotes.models.bdui.CreateNoteAction
 import com.terabyte.ktornotes.models.bdui.RowComponent
 import com.terabyte.ktornotes.models.bdui.TextComponent
 import com.terabyte.ktornotes.models.bdui.TextFieldComponent
@@ -83,6 +85,17 @@ fun Route.BDUIRoutes() {
                                     style = TextStyle(
                                         fontSize = 16
                                     )
+                                ),
+                                ButtonComponent(
+                                    width = SizeSpec.WrapContent,
+                                    height = SizeSpec.WrapContent,
+                                    margin = Margin(
+                                        top = 32
+                                    ),
+                                    text = "Create",
+                                    textColorHex = "#FFFFFFFF",
+                                    backgroundColorHex = "#FF4CAF50",
+                                    action = CreateNoteAction
                                 )
                             )
                         )
