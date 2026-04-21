@@ -1,0 +1,74 @@
+package com.terabyte.ktornotes.models.bdui
+
+import com.terabyte.ktornotes.models.bdui.attributes.HorizontalAlignment
+import com.terabyte.ktornotes.models.bdui.attributes.HorizontalArrangement
+import com.terabyte.ktornotes.models.bdui.attributes.Margin
+import com.terabyte.ktornotes.models.bdui.attributes.Padding
+import com.terabyte.ktornotes.models.bdui.attributes.SizeSpec
+import com.terabyte.ktornotes.models.bdui.attributes.TextStyle
+import com.terabyte.ktornotes.models.bdui.attributes.VerticalAlignment
+import com.terabyte.ktornotes.models.bdui.attributes.VerticalArrangement
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+@SerialName("Component")
+sealed class Component {
+    abstract val width: SizeSpec
+    abstract val height: SizeSpec
+    abstract val padding: Padding
+    abstract val margin: Margin
+}
+
+
+@Serializable
+@SerialName("Column")
+data class ColumnComponent(
+    override val width: SizeSpec,
+    override val height: SizeSpec,
+    override val padding: Padding = Padding(),
+    override val margin: Margin = Margin(),
+    val verticalArrangement: VerticalArrangement,
+    val horizontalAlignment: HorizontalAlignment,
+    val backgroundColorHex: String? = null,
+    val children: List<Component>
+) : Component()
+
+
+@Serializable
+@SerialName("Row")
+data class RowComponent(
+    override val width: SizeSpec,
+    override val height: SizeSpec,
+    override val padding: Padding = Padding(),
+    override val margin: Margin = Margin(),
+    val verticalAlignment: VerticalAlignment,
+    val horizontalArrangement: HorizontalArrangement,
+    val backgroundColorHex: String? = null,
+    val children: List<Component>
+) : Component()
+
+
+@Serializable
+@SerialName("Text")
+data class TextComponent(
+    override val width: SizeSpec,
+    override val height: SizeSpec,
+    override val padding: Padding = Padding(),
+    override val margin: Margin = Margin(),
+    val text: String,
+    val style: TextStyle? = null
+) : Component()
+
+
+@Serializable
+@SerialName("Button")
+data class ButtonComponent(
+    override val width: SizeSpec,
+    override val height: SizeSpec,
+    override val padding: Padding = Padding(),
+    override val margin: Margin = Margin(),
+    val text: String,
+    val action: Action
+) : Component()
