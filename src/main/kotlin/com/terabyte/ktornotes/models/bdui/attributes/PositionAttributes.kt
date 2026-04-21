@@ -20,6 +20,12 @@ sealed class SizeSpec {
     @SerialName("matchParent")
     object MatchParent : SizeSpec()
 
+    @Serializable
+    @SerialName("weight")
+    data class Weight(
+        val weight: Float
+    ) : SizeSpec()
+
 }
 
 

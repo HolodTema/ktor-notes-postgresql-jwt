@@ -63,6 +63,19 @@ data class TextComponent(
 
 
 @Serializable
+@SerialName("TextField")
+data class TextFieldComponent(
+    override val width: SizeSpec,
+    override val height: SizeSpec,
+    override val padding: Padding = Padding(),
+    override val margin: Margin = Margin(),
+    val singleLine: Boolean = true,
+    val hint: String = "",
+    val style: TextStyle? = null
+) : Component()
+
+
+@Serializable
 @SerialName("Button")
 data class ButtonComponent(
     override val width: SizeSpec,

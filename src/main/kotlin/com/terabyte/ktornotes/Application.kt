@@ -2,6 +2,7 @@ package com.terabyte.ktornotes
 
 import com.terabyte.ktornotes.plugins.configureDatabase
 import com.terabyte.ktornotes.plugins.configureJWT
+import com.terabyte.ktornotes.routing.BDUIRoutes
 import com.terabyte.ktornotes.routing.authRoutes
 import com.terabyte.ktornotes.routing.noteRoutes
 import com.terabyte.ktornotes.routing.userRoutes
@@ -42,5 +43,6 @@ fun Application.module() {
         authRoutes(userService)
         noteRoutes(noteService)
         userRoutes(userService)
+        BDUIRoutes()
     }
 }
