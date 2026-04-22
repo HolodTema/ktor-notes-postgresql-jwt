@@ -2,6 +2,7 @@ package com.terabyte.ktornotes.routing
 
 import com.terabyte.ktornotes.models.bdui.ButtonComponent
 import com.terabyte.ktornotes.models.bdui.ColumnComponent
+import com.terabyte.ktornotes.models.bdui.Component
 import com.terabyte.ktornotes.models.bdui.CreateNoteAction
 import com.terabyte.ktornotes.models.bdui.RowComponent
 import com.terabyte.ktornotes.models.bdui.TextComponent
@@ -103,7 +104,7 @@ fun Route.BDUIRoutes() {
                         )
                     )
                 )
-                call.respond(screen)
+                call.respond(screen as Component)
             }
 
         }

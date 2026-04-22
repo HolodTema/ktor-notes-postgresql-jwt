@@ -6,33 +6,24 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class SizeSpec {
-    abstract val type: String
 
     @Serializable
     @SerialName("fixed")
-    data class Fixed(val dp: Int) : SizeSpec() {
-        override val type = "fixed"
-    }
+    data class Fixed(val dp: Int) : SizeSpec()
 
     @Serializable
     @SerialName("wrapContent")
-    object WrapContent : SizeSpec() {
-        override val type = "wrapContent"
-    }
+    object WrapContent : SizeSpec()
 
     @Serializable
     @SerialName("matchParent")
-    object MatchParent : SizeSpec() {
-        override val type = "matchParent"
-    }
+    object MatchParent : SizeSpec()
 
     @Serializable
     @SerialName("weight")
     data class Weight(
         val weight: Float
-    ) : SizeSpec() {
-        override val type = "weight"
-    }
+    ) : SizeSpec()
 
 }
 
@@ -59,140 +50,98 @@ data class Margin(
 
 @Serializable
 sealed class VerticalAlignment {
-    abstract val type: String
 
     @Serializable
     @SerialName("center")
-    object Center : VerticalAlignment() {
-        override val type = "center"
-    }
+    object Center : VerticalAlignment()
 
     @Serializable
     @SerialName("top")
-    object Top : VerticalAlignment() {
-        override val type = "top"
-    }
+    object Top : VerticalAlignment()
 
     @Serializable
     @SerialName("bottom")
-    object Bottom : VerticalAlignment() {
-        override val type = "bottom"
-    }
+    object Bottom : VerticalAlignment()
 
 }
 
 
 @Serializable
 sealed class HorizontalAlignment {
-    abstract val type: String
 
     @Serializable
     @SerialName("center")
-    object Center : HorizontalAlignment() {
-        override val type = "center"
-    }
+    object Center : HorizontalAlignment()
 
     @Serializable
     @SerialName("end")
-    object End : HorizontalAlignment() {
-        override val type = "end"
-    }
-
+    object End : HorizontalAlignment()
     @Serializable
     @SerialName("start")
-    object Start : HorizontalAlignment() {
-        override val type = "start"
-    }
+    object Start : HorizontalAlignment()
 
 }
 
 @Serializable
 sealed class VerticalArrangement {
-    abstract val type: String
 
     @Serializable
     @SerialName("center")
-    object Center : VerticalArrangement() {
-        override val type = "center"
-    }
+    object Center : VerticalArrangement()
 
 
     @Serializable
     @SerialName("top")
-    object Top : VerticalArrangement() {
-        override val type = "top"
-    }
+    object Top : VerticalArrangement()
 
 
     @Serializable
     @SerialName("bottom")
-    object Bottom : VerticalArrangement() {
-        override val type = "bottom"
-    }
+    object Bottom : VerticalArrangement()
 
 
     @Serializable
     @SerialName("spaceBetween")
-    object SpaceBetween : VerticalArrangement() {
-        override val type = "spaceBetween"
-    }
+    object SpaceBetween : VerticalArrangement()
 
 
     @Serializable
     @SerialName("spaceEvenly")
-    object SpaceEvenly : VerticalArrangement() {
-        override val type = "spaceEvenly"
-    }
+    object SpaceEvenly : VerticalArrangement()
 
 
     @Serializable
     @SerialName("spaceAround")
-    object SpaceAround : VerticalArrangement() {
-        override val type = "spaceAround"
-    }
-
+    object SpaceAround : VerticalArrangement()
 
 }
 
 
 @Serializable
 sealed class HorizontalArrangement {
-    abstract val type: String
 
     @Serializable
     @SerialName("center")
-    object Center : HorizontalArrangement() {
-        override val type = "center"
-    }
+    object Center : HorizontalArrangement()
 
     @Serializable
     @SerialName("start")
-    object Start : HorizontalArrangement() {
-        override val type = "start"
-    }
+    object Start : HorizontalArrangement()
 
     @Serializable
     @SerialName("end")
-    object End : HorizontalArrangement() {
-        override val type = "end"
-    }
+    object End : HorizontalArrangement()
 
     @Serializable
     @SerialName("spaceBetween")
-    object SpaceBetween : HorizontalArrangement() {
-        override val type = "spaceBetween"
-    }
+    object SpaceBetween : HorizontalArrangement()
 
     @Serializable
     @SerialName("spaceEvenly")
-    object SpaceEvenly : HorizontalArrangement() {
-        override val type = "spaceEvenly"
-    }
+    object SpaceEvenly : HorizontalArrangement()
 
     @Serializable
     @SerialName("spaceAround")
-    object SpaceAround : HorizontalArrangement() {
-        override val type = "spaceAround"
-    }
+    object SpaceAround : HorizontalArrangement()
 
 }

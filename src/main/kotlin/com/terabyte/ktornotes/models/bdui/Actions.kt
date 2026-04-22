@@ -5,23 +5,17 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-sealed class Action {
-    abstract val type: String
-}
+sealed class Action
 
 
 @Serializable
 @SerialName("ToastAction")
 data class ToastAction(
     val message: String
-) : Action() {
-    override val type = "ToastAction"
-}
+) : Action()
 
 
 
 @Serializable
 @SerialName("CreateNoteAction")
-object CreateNoteAction: Action() {
-    override val type = "CreateNoteAction"
-}
+object CreateNoteAction: Action()

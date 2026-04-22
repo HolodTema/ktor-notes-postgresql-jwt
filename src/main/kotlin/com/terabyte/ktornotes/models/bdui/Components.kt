@@ -14,7 +14,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class Component {
-    abstract val type: String
     abstract val width: SizeSpec
     abstract val height: SizeSpec
     abstract val padding: Padding
@@ -33,9 +32,7 @@ data class ColumnComponent(
     val horizontalAlignment: HorizontalAlignment,
     val backgroundColorHex: String? = null,
     val children: List<Component>
-) : Component() {
-    override val type = "Column"
-}
+) : Component()
 
 
 @Serializable
@@ -49,9 +46,7 @@ data class RowComponent(
     val horizontalArrangement: HorizontalArrangement,
     val backgroundColorHex: String? = null,
     val children: List<Component>
-) : Component() {
-    override val type = "Row"
-}
+) : Component()
 
 
 @Serializable
@@ -63,9 +58,7 @@ data class TextComponent(
     override val margin: Margin = Margin(),
     val text: String,
     val style: TextStyle? = null
-) : Component() {
-    override val type = "Text"
-}
+) : Component()
 
 
 @Serializable
@@ -79,9 +72,7 @@ data class TextFieldComponent(
     val singleLine: Boolean = true,
     val hint: String = "",
     val style: TextStyle? = null
-) : Component() {
-    override val type = "TextField"
-}
+) : Component()
 
 
 
@@ -96,7 +87,5 @@ data class ButtonComponent(
     val textColorHex: String? = null,
     val backgroundColorHex: String? = null,
     val action: Action
-) : Component() {
-    override val type = "Button"
-}
+) : Component()
 
