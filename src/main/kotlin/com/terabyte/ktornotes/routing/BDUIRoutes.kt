@@ -68,6 +68,7 @@ fun Route.BDUIRoutes() {
                                 TextFieldComponent(
                                     width = SizeSpec.MatchParent,
                                     height = SizeSpec.WrapContent,
+                                    id = "text_field_note_title",
                                     singleLine = true,
                                     hint = "Note title",
                                     style = TextStyle(
@@ -80,6 +81,7 @@ fun Route.BDUIRoutes() {
                                     margin = Margin(
                                         top = 32
                                     ),
+                                    id = "text_field_note_content",
                                     singleLine = false,
                                     hint = "Note text",
                                     style = TextStyle(

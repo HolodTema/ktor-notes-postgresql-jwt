@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @SerialName("Action")
 sealed class Action {
+    abstract val type: String
 }
 
 
@@ -15,10 +16,13 @@ sealed class Action {
 data class ToastAction(
     val message: String
 ) : Action() {
+    override val type = "ToastAction"
 }
+
 
 
 @Serializable
 @SerialName("CreateNoteAction")
 object CreateNoteAction: Action() {
+    override val type = "CreateNoteAction"
 }
