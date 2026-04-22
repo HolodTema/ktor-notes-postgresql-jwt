@@ -13,7 +13,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-@SerialName("Component")
 sealed class Component {
     abstract val type: String
     abstract val width: SizeSpec
